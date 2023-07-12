@@ -12,6 +12,7 @@ tweetBtn.addEventListener('click', function(){
 function getFeedHtml(){
     let feedHtml = ""
 
+
     tweetsData.forEach(function(tweet){
         feedHtml += `<div class="tweet">
                         <div class="tweet-inner">
@@ -21,15 +22,15 @@ function getFeedHtml(){
                                 <p class="tweet-text">${tweet.tweetText}</p>
                                 <div class="tweet-details">
                                     <span class="tweet-detail">
-                                        <i class="fa-regular fa-comment-dots"></i>
+                                        <i class="fa-regular fa-comment-dots" data-reply="${tweet.uuid}"></i>
                                         ${tweet.replies.length}
                                     </span>
                                     <span class="tweet-detail">
-                                        <i class="fa-solid fa-heart"></i>
+                                        <i class="fa-solid fa-heart" data-like="${tweet.uuid}"></i>
                                         ${tweet.likes}
                                         </span>
                                     <span class="tweet-detail">
-                                        <i class="fa-solid fa-retweet"></i>
+                                        <i class="fa-solid fa-retweet" data-retweet="${tweet.uuid}"></i>
                                         ${tweet.retweets}
                                     </span>
                                 </div>   
