@@ -37,4 +37,10 @@ function getFeedHtml(){
             return feedHtml
         }
 
-console.log(getFeedHtml())
+
+        
+function render(){
+    return tweetFeed.innerHTML = getFeedHtml()
+}
+
+render()
