@@ -21,6 +21,10 @@ i{
     color: red;
 }
 
+.green {
+    color: green;
+}
+
 .retweeted {
   color: limegreen;
 }
@@ -130,3 +134,5 @@ button{
 .fa-solid{
     color: #999;
 }
+
+
