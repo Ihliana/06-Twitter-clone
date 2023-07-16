@@ -4,12 +4,13 @@ const tweetInput = document.getElementById('tweet-input')
 
 const tweetFeed = document.getElementById('feed')
 
-
 /*
 Challenge:
-1. Somewhere in index.js there is a line of code 
-   we no longer need. Find it and delete it!
-*/ 
+1. Bring in uuidjs.
+*/
+
+import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
+
 
 document.addEventListener('click', function(e){
 
@@ -75,7 +76,30 @@ function handleReplyClick(replyId){
 
 
 function handleTweetBtnClick(){
-    console.log(tweetInput.value)
+    console.log(
+    /*
+        Challenge:
+        2. When the Tweet button is clicked, log out an object
+        for a new tweet. Make sure you include the text of 
+        the tweet (how can you get that?) and a unique 
+        identifier using uuidjs.
+        
+        The handle @Scrimba (or whatever you prefer) and 
+        the profile pic scrimbalogo.png can be hard-coded.
+        */ 
+
+        {
+            handle: `@Scrimba 💎`,
+            profilePic: `images/scrimbalogo.jpg`,
+            likes: 0,
+            retweets: 0,
+            tweetText: tweetInput.value,
+            replies: [],
+            isLiked: false,
+            isRetweeted: false,
+            uuid: uuidv4(),
+        }
+    )
 }
 
 
