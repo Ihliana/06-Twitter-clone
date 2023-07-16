@@ -5,19 +5,20 @@ const tweetInput = document.getElementById('tweet-input')
 
 const tweetFeed = document.getElementById('feed')
 
-tweetBtn.addEventListener('click', function(){
-    console.log(tweetInput.value)
-})
-
 
 document.addEventListener('click', function(e){
+
     if(e.target.dataset.like){
         handleLikeClick(e.target.dataset.like)
     }
 
     else if(e.target.dataset.retweet){
         handleRetweetClick(e.target.dataset.retweet)
+    } 
+    else if(e.target.dataset.reply){
+        handleReplyClick(e.target.dataset.reply)
     }
+
 })
 
 
@@ -60,6 +61,21 @@ function handleRetweetClick(tweetId){
 }
 
 
+
+/*
+Challenge:
+1. Use the uuid stored in 'replyId' to take control 
+   of the div containing that tweet’s replies. 
+   (Check the HTML string below to remind yourself 
+   what id that div will have.)  
+2. Toggle the CSS class "hidden" on that div. 
+*/
+
+function handleReplyClick(replyId){
+    document.getElementById(`replies-${replyId}`).classList.toggle('hidden')
+}
+
+
 function getFeedHtml(){
     let feedHtml = ""
 
@@ -69,22 +85,11 @@ function getFeedHtml(){
        let likeIconClass = tweet.isLiked ? 'liked' : ''
        let retweetIconClass = tweet.isRetweeted ? "retweeted" : ""
 
-        /*
-        Challenge:
-        1. Use an if statement to check if a tweet has replies.
-        2. If it does, log out the uuid for that tweet.
-        */
 
         let repliesHtml = ""
 
         if(tweet.replies.length > 0){
-            /*
-            Challenge:
-            1. If a tweet has replies, iterate through the replies
-               and wrap each one in the HTML template provided below. 
-               Make sure to replace words in UPPERCASE with data from 
-               the tweet. On each iteration, add this HTML to repliesHtml.
-*/
+
             tweet.replies.forEach(function(reply){
                 repliesHtml += `<div class="tweet-reply">
                     <div class="tweet-inner">
