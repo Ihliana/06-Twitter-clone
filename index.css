@@ -17,13 +17,7 @@ i{
     cursor: pointer;
 }
 
-.liked{
-    color: red;
-}
 
-.retweeted {
-  color: limegreen;
-}
 
 /* layout */
 
@@ -131,4 +125,13 @@ button{
     color: #999;
 }
 
+
+.fa-trash:hover, 
+.liked{
+    color: red;
+}
+
+.retweeted {
+  color: limegreen;
+}
 

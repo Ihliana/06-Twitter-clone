@@ -1,34 +1,31 @@
-import tweetsData from './data.js'
+import {tweetsData} from './data.js'
 
-const tweetFeed = document.getElementById('feed')
+let tweetFeed = document.getElementById('feed')
 
-/*
-Challenge:
-1. Bring in uuidjs.
-*/
 
 import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
 
 
-/*
-Challenge:
-3. We could improve index.js by moving one line
-   of code to a better position. Find it and move it!
-*/
 document.addEventListener('click', function(e){
 
     if(e.target.dataset.like){
         handleLikeClick(e.target.dataset.like)
-    }
 
+    }
     else if(e.target.dataset.retweet){
         handleRetweetClick(e.target.dataset.retweet)
+
     } 
     else if(e.target.dataset.reply){
         handleReplyClick(e.target.dataset.reply)
+
     }
     else if(e.target.id === 'tweet-btn'){
         handleTweetBtnClick()
+
+    } else if(e.target.dataset.delete){
+        handleDeleteClick(e.target.dataset.delete)
+
     }
 
 })
@@ -81,17 +78,6 @@ function handleReplyClick(replyId){
 function handleTweetBtnClick(){
 
     const tweetInput = document.getElementById('tweet-input')
-    /*
-    Challenge:
-    1. Add the new tweet object to 'tweetsData'
-    and make it render at the top of the feed. 
-    */ 
-
-    /*
-    Challenge:
-    1. No empty tweets!
-    2. Clear the textarea after tweeting!
-    */
 
     if(tweetInput.value){
         tweetsData.unshift(
@@ -116,11 +102,21 @@ function handleTweetBtnClick(){
 
 
 
-function getFeedHtml(){
+    function handleDeleteClick(deleteId){
+        //filter out the tweet with the specified UUID
+        const updatedTweetsData = tweetsData.filter((tweet) => tweet.uuid !== deleteId)
+        render(updatedTweetsData)
+
+    }
+
+
+
+function getFeedHtml(data){
     let feedHtml = ""
 
+    const tweets = data || tweetsData
 
-    tweetsData.forEach(function(tweet){
+    tweets.forEach(function(tweet){
 
        let likeIconClass = tweet.isLiked ? 'liked' : ''
        let retweetIconClass = tweet.isRetweeted ? "retweeted" : ""
@@ -167,6 +163,9 @@ function getFeedHtml(){
                                         <i class="fa-solid fa-retweet ${retweetIconClass}" data-retweet="${tweet.uuid}"></i>
                                         ${tweet.retweets}
                                     </span>
+                                    <span class="tweet-delete">
+                                        <i class="fa-solid fa-trash" data-delete="${tweet.uuid}"></i>
+                                    </span>
                                 </div>   
                             </div>            
                         </div>
@@ -181,8 +180,8 @@ function getFeedHtml(){
 
 
         
-function render(){
-    return tweetFeed.innerHTML = getFeedHtml()
+function render(data){
+    return tweetFeed.innerHTML = getFeedHtml(data)
 }
 
-render()
+render(tweetsData)
